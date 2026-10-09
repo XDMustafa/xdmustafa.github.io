@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پژوهش دقیق بر روی نظریه تابش حرارتی جسم سیاه</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- MathJax: renders LaTeX natively in the browser. Works on GitHub Pages. -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="index.html">S. Mustafa</a>
+  <nav>
+    <a href="index.html">خانه</a>
+    <a href="blackbody.html">نوشته‌ها</a>
+    <a href="https://github.com/XDMustafa" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+</header>
+
+<main class="wrap">
+<article>
+
+  <h1>پژوهش دقیق بر روی نظریه تابش حرارتی جسم سیاه</h1>
+  <p class="authors">Xin Yang، Bing Wei — Xidian University · بازنویسی و تأیید محاسباتی: S. Mustafa</p>
+
+  <div class="lead">
+    پس از مطالعه‌ی عمیق معادله‌ی نرمالایزشده‌ی پلانک، نوع تازه‌ای از منحنی‌های طیف تابش جسم سیاه
+    ارائه می‌شود و دو پارامتر «عرض نسبی» (RW) و «فاکتور تقارن» (RSF) تعریف می‌شوند. تأیید تجربی
+    این پارامترها سه کاربرد دارد: (۱) اندازه‌گیری دما از روی طول موج تابش، (۲) تعیین کیفیت جسم سیاه،
+    و (۳) استفاده از دمای حاصل به‌عنوان یک معیار.
+  </div>
+
+  <h2>۱) مقدمه</h2>
+  <p>
+    در صد سال گذشته، اساس نظری تابش حرارتی جسم سیاه در قالب قانون پلانک بیان شده است:
+  </p>
+  <div class="eq">$$ e_b(\lambda, T) = C_1\,\lambda^{-5}\left(e^{\,C_2/\lambda T} - 1\right)^{-1} \tag{1}$$</div>
+  <p>
+    که در آن \(C_1 = 3.7415\times10^{-4}\ \mathrm{W\cdot\mu m^{4}\cdot m^{-2}}\) و
+    \(C_2 = 1.4388\times10^{4}\ \mathrm{\mu m\cdot K}\). در اینجا \(e_b(\lambda,T)\) گسیلندگی
+    تابشی تک‌فام جسم سیاه در دمای \(T\) (کلوین) و طول موج \(\lambda\) (میکرومتر) است.
+  </p>
+  <p>
+    با صفر قراردادن مشتق اول \(e_b\) نسبت به \(\lambda\)، رابطه‌ی بین دما و طول موج قله \(\lambda_m\)
+    به دست می‌آید؛ همان قانون جابجایی وین:
+  </p>
+  <div class="eq">$$ \lambda_m\, T = 2897.8268\ \mathrm{\mu m\cdot K} \tag{2}$$</div>
+  <p>با مطالعه‌ی نقاط عطف در دو طرف منحنی، معادله‌ی زیر برای این نقاط حاصل می‌شود:</p>
+  <div class="eq">$$ (x^2 - 12x + 30)\,e^{2x} + (x^2 + 12x - 60)\,e^{x} + 30 = 0 \tag{3}$$</div>
+  <p>و از آن، رابطه‌ی نقطه‌ی عطف چپ \(\lambda_{il}\) و راست \(\lambda_{ir}\) با دما:</p>
+  <div class="eq">$$ \lambda_{il}\,T = 4082.6612\ \mathrm{\mu m\cdot K} \qquad\qquad \lambda_{ir}\,T = 1703.8230\ \mathrm{\mu m\cdot K} \tag{4,5}$$</div>
+  <p>برای یافتن دامنه‌ی طول موج معادله (۱)، یک معادله‌ی نرمالایزشده‌ی پلانک پیشنهاد شده است:</p>
+  <div class="eq">$$ x^5 - 21.2014\,\eta\, e^{x} + 21.2014\,\eta = 0 \tag{6}$$</div>
+  <p>که ضریب نرمال‌سازی \(\eta\) چنین تعریف می‌شود و \(x = C_2/\lambda T\):</p>
+  <div class="eq">$$ \lambda^{-5}\left(e^{\,C_2/\lambda T}-1\right)^{-1} = \eta\,\lambda_m^{-5}\left(e^{\,C_2/\lambda_m T}-1\right)^{-1} \tag{7}$$</div>
+  <p>
+    بدیهی است \(\eta\in(0,1)\). برای \(\eta = 10^{-6}\)، دامنه‌ی طول موج \(\lambda\) بین ۸۸ تا ۱۰۵۱
+    میکرومتر است، وقتی دما بین ۲۰۰ تا ۶۰۰۰ کلوین باشد.
+  </p>
+
+  <figure>
+    <div class="placeholder">شکل ۱ — منحنی طیف سنتی تابش جسم سیاه را اینجا بگذار<br>
+      <code>&lt;img src="images/fig1.png" alt="شکل ۱"&gt;</code></div>
+    <figcaption>شکل ۱: منحنی طیف سنتی تابش جسم سیاه.</figcaption>
+  </figure>
+
+  <h2>۲) تأیید محاسباتی</h2>
+  <p>
+    از صفر‌کردن مشتق پلانک و جایگذاری \(x = C_2/\lambda T\)، شکل ساده‌شده‌ی معادله‌ی وین چنین می‌شود:
+  </p>
+  <div class="eq">$$ x\,e^{x} - 5\left(e^{x}-1\right) = 0 \quad\Longleftrightarrow\quad 5\left(e^{x}-1\right) = x\,e^{x} $$</div>
+  <p>این معادله‌ی متعالی با چند روش حل شد و همگی به یک ریشه همگرا شدند:</p>
+  <div class="tbl-wrap">
+    <table class="data">
+      <caption>جدول — حل عددی معادله‌ی وین (نوت‌بوک پایتون)</caption>
+      <thead>
+        <tr><th>روش</th><th>ریشه‌ی \(x\)</th><th>\(\lambda_m T\) (μm·K)</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>Newton</th><td>4.965114</td><td>2897.8187</td></tr>
+        <tr><th>Bisection</th><td>4.9651</td><td>2897.8186</td></tr>
+        <tr><th>Fixed-point</th><td>4.9651</td><td>2897.8185</td></tr>
+        <tr><th>Graphical</th><td>4.93016</td><td>2918.36</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    مقدار دقیق: \(x \approx 4.9651\) و \(\lambda_m T \approx 2897.82\ \mathrm{\mu m\cdot K}\)، هم‌خوان با
+    مرجع. نقاط عطف نیز به‌صورت عددی بازتولید شدند: راست \(1703.823\) و چپ \(4082.700\ \mathrm{\mu m\cdot K}\).
+  </p>
+
+  <h2>۳) نتایج: منحنی طیف نرمالایزشده</h2>
+  <p>
+    برای هر \(\eta\) مشخص، معادله‌ی (۶) دو ریشه‌ی حقیقی \(x_{\eta l}<x_{\eta s}\) دارد که به طول موج‌های
+    متناظر \(\lambda_{\eta l}\) و \(\lambda_{\eta s}\) در دو طرف منحنی منجر می‌شوند. برای \(\eta=1\)
+    داریم \(x_{\eta l}=x_{\eta s}=x_m\). با \(x=C_2/\lambda T\):
+  </p>
+  <div class="eq">$$ \lambda_{\eta l}=\frac{C_2}{x_{\eta l}\,T}, \qquad \lambda_{\eta s}=\frac{C_2}{x_{\eta s}\,T}, \qquad \lambda_m=\frac{C_2}{x_m\,T} \tag{9,10,11}$$</div>
+
+  <div class="tbl-wrap">
+    <table class="data">
+      <caption>جدول ۱: مقادیر \(x_{\eta l}\)، \(x_{\eta s}\)، \(RW_{\eta t}\) و \(RSF_{\eta t}\) برای مقادیر مختلف \(\eta\).</caption>
+      <thead>
+        <tr><th>η</th><th>x<sub>ηs</sub></th><th>x<sub>ηl</sub></th><th>RW<sub>ηt</sub></th><th>RSF<sub>ηt</sub></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0.0100</td><td>15.1368</td><td>0.7496</td><td>6.2952</td><td>0.1195</td></tr>
+        <tr><td>0.0500</td><td>12.6168</td><td>1.1958</td><td>3.7584</td><td>0.1924</td></tr>
+        <tr><td>0.1000</td><td>11.4295</td><td>1.4862</td><td>2.9060</td><td>0.2417</td></tr>
+        <tr><td>0.2000</td><td>10.1358</td><td>1.8818</td><td>2.1484</td><td>0.3114</td></tr>
+        <tr><td>0.3000</td><td>9.3001</td><td>2.1916</td><td>1.7314</td><td>0.3685</td></tr>
+        <tr><td>0.4000</td><td>8.6505</td><td>2.4682</td><td>1.4375</td><td>0.4213</td></tr>
+        <tr><td>0.5000</td><td>8.0966</td><td>2.7326</td><td>1.2036</td><td>0.4736</td></tr>
+        <tr><td>0.6000</td><td>7.5942</td><td>2.9986</td><td>1.0019</td><td>0.5281</td></tr>
+        <tr><td>0.7000</td><td>7.1131</td><td>3.2796</td><td>0.8158</td><td>0.5879</td></tr>
+        <tr><td>0.8000</td><td>6.6236</td><td>3.5960</td><td>0.6311</td><td>0.6581</td></tr>
+        <tr><td>0.8500</td><td>6.3615</td><td>3.7795</td><td>0.5331</td><td>0.7003</td></tr>
+        <tr><td>0.9000</td><td>6.0722</td><td>3.9946</td><td>0.4252</td><td>0.7512</td></tr>
+        <tr><td>1.0000</td><td>4.9646</td><td>4.9646</td><td>0.0000</td><td>1.0000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <div class="placeholder">شکل ۳ — نوع جدید منحنی طیف نرمالایزشده را اینجا بگذار<br>
+      <code>&lt;img src="images/fig3.png" alt="شکل ۳"&gt;</code></div>
+    <figcaption>شکل ۳: نوع جدید منحنی طیف نرمالایزشده‌ی تابش حرارتی جسم سیاه.</figcaption>
+  </figure>
+
+  <div class="tbl-wrap">
+    <table class="data">
+      <caption>جدول ۲: ضریب نرمال‌سازی \(\eta\) بر حسب طول موج \(\lambda\) (μm) در دمای \(T=1000\ \mathrm{K}\).</caption>
+      <thead>
+        <tr><th>η</th><th>λ<sub>ηs</sub></th><th>λ<sub>ηl</sub></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0.0100</td><td>0.9505</td><td>19.1949</td></tr>
+        <tr><td>0.0500</td><td>1.1404</td><td>12.0326</td></tr>
+        <tr><td>0.1000</td><td>1.2589</td><td>9.6808</td></tr>
+        <tr><td>0.2000</td><td>1.4195</td><td>7.6458</td></tr>
+        <tr><td>0.3000</td><td>1.5471</td><td>6.5649</td></tr>
+        <tr><td>0.4000</td><td>1.6633</td><td>6.8294</td></tr>
+        <tr><td>0.5000</td><td>1.7770</td><td>2.7325</td></tr>
+        <tr><td>0.6000</td><td>1.8946</td><td>4.7983</td></tr>
+        <tr><td>0.7000</td><td>2.0227</td><td>4.3871</td></tr>
+        <tr><td>0.8000</td><td>2.1722</td><td>4.0011</td></tr>
+        <tr><td>0.8500</td><td>2.2617</td><td>3.8069</td></tr>
+        <tr><td>0.9000</td><td>2.3695</td><td>3.6018</td></tr>
+        <tr><td>1.0000</td><td>2.8981</td><td>2.8981</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>۴) ویژگی‌ها و تحلیل کاربرد</h2>
+  <p>«عرض نسبی» و «فاکتور تقارن» به‌صورت تجربی (از طول موج‌های اندازه‌گیری‌شده):</p>
+  <div class="eq">$$ RW_{\eta e} = \frac{\lambda_m - \lambda_{\eta s}}{\lambda_m}, \qquad RSF_{\eta e} = \frac{\lambda_m - \lambda_{\eta s}}{\lambda_{\eta l} - \lambda_m} \tag{12,13}$$</div>
+  <p>و به‌صورت نظری (بر حسب ریشه‌های \(x\)):</p>
+  <div class="eq">$$ RW_{\eta t} = \frac{x_m\,(x_{\eta s} - x_l)}{x_{\eta s}\,x_{\eta l}}, \qquad RSF_{\eta t} = \frac{x_{\eta l}\,(x_{\eta s} - x_m)}{x_{\eta s}\,(x_m - x_{\eta l})} \tag{14,15}$$</div>
+  <p>همچنین دمای واقعی را می‌توان از طول موج‌ها استخراج کرد — یعنی روشی برای دماسنجی بر پایه‌ی طول موج:</p>
+  <div class="eq">$$ T_l = \frac{C_2}{x_l\,\lambda_l}, \qquad T_s = \frac{C_2}{x_s\,\lambda_s}, \qquad T_m = \frac{C_2}{x_m\,\lambda_m} \tag{16,17,18}$$</div>
+
+  <h2>۵) بحث</h2>
+  <p>
+    بر پایه‌ی نوع جدید منحنی‌ها، سه نتیجه‌ی مهم به دست می‌آید. نخست، روشی برای تأیید ماهیت جسم سیاه و
+    درجه‌بندی آن با دو خطای \(a\) و \(b\):
+  </p>
+  <div class="eq">$$ a = 1 - \left|\frac{RW_{\eta t} - RW_{\eta e}}{RW_{\eta t} + RW_{\eta e}}\right|, \qquad b = 1 - \left|\frac{RSF_{\eta t} - RSF_{\eta e}}{RSF_{\eta t} + RSF_{\eta e}}\right| \tag{19,20}$$</div>
+  <p>
+    وقتی \(a=b=1\)، جسم سیاهِ ایده‌آل است؛ مقادیر نزدیک به ۱ درجات مختلف جسم سیاه واقعی را تعریف می‌کنند.
+    دوم، در دمای ثابت می‌توان دمای واقعی را از سه طول موج (قله و دو طول موج متناظر با یک \(\eta\) مناسب)
+    تعیین کرد که یک کالیبراسیون متقابل فراهم می‌کند. سوم، برای تابش حرارتی زمین، امواج مایکروویوِ
+    شناسایی‌شده توسط سنجش از دور پسیو با قانون پلانک قابل پیش‌بینی نیست؛ برای جسم خاکستری باید قانون
+    کیرشهف عمیق‌تر مطالعه شود.
+  </p>
+
+  <hr>
+  <p style="font-size:.9rem; color:var(--muted);">
+    ارجاع به مقاله‌ی اصلی: Yang, X. &amp; Wei, B. “Exact research on the theory of the blackbody
+    thermal radiation.” <em>Sci. Rep.</em> <strong>6</strong>, 37214 (2016). doi:10.1038/srep37214
+  </p>
+
+</article>
+</main>
+
+<footer class="site">
+  <span>© ۱۴۰۴ S. Mustafa</span>
+  <span><a href="index.html">بازگشت به خانه</a></span>
+</footer>
+
+</body>
+</html>
