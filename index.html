@@ -1,64 +1,25 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>S. Mustafa</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header class="site">
-  <a class="brand" href="index.html">S. Mustafa</a>
-  <nav>
-    <a href="index.html">خانه</a>
-    <a href="blackbody.html">نوشته‌ها</a>
-    <a href="https://github.com/XDMustafa" target="_blank" rel="noopener">GitHub</a>
-  </nav>
-</header>
-
-<main class="wrap">
-
-  <h1>S.Mustafa</h1>
-  <p class="subtitle">دانشجوی فیزیک</p>
-
-  <p>
-    اینجا یادداشت‌ها و پروژه‌های فیزیک محاسباتی‌ام را می‌نویسم — از حل عددی مسائل
-    کتاب‌های درسی تا بازتولید مقاله‌ها با کد. تمرکزم روی مدل‌سازی مفاهیم فیزیک،
-    شبیه‌سازی، و استفاده از شبکه‌های عصبی مبتنی بر فیزیک (PINNs) است.
-    <span style="color:var(--muted)">(این متن را در <code>index.html</code> ویرایش کن.)</span>
-  </p>
-
-  <p style="color:var(--muted); font-size:.95rem;">
-    <a href="https://github.com/XDMustafa" target="_blank" rel="noopener">GitHub</a> ·
-    <a href="https://t.me/XD_SMMA" target="_blank" rel="noopener">Telegram</a> ·
-    <a href="cv.pdf">CV</a>
-  </p>
-
-  <h2>نوشته‌ها</h2>
-  <ul class="posts">
-    <li>
-      <a class="title" href="blackbody.html">پژوهش دقیق بر روی نظریه تابش حرارتی جسم سیاه</a>
-      <span class="tag">فیزیک محاسباتی</span>
-      <span class="meta">بازنویسی مقاله + تأیید عددی با پایتون · مهر ۱۴۰۴</span>
-    </li>
-    <!-- برای افزودن نوشته‌ی جدید، همین بلوک <li> را کپی کن. -->
-  </ul>
-
-  <h2>پروژه‌ها</h2>
-  <ul class="posts">
-    <li>
-      <a class="title" href="https://github.com/XDMustafa/Electromagnetic-Milford-Solution" target="_blank" rel="noopener">Electromagnetic-Milford-Solution</a>
-      <span class="meta">حل مسائل و مدل‌سازی مفاهیم کتاب الکترومغناطیس میلفورد با برنامه‌نویسی.</span>
-    </li>
-  </ul>
-
-</main>
-
-<footer class="site">
-  <span>© ۱۴۰۴ S. Mustafa</span>
-  <span>ساخته‌شده با HTML ساده · میزبانی روی GitHub Pages</span>
-</footer>
-
-</body>
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>S. Mustafa</title>
+    <meta name="description" content="Physics student · computational physics, simulation, PINNs. وبلاگ س. مصطفی" />
+    <script>
+      // Set theme + language before first paint so there is no flash.
+      (function () {
+        try {
+          var l = localStorage.getItem("lang") || "fa";
+          var t = localStorage.getItem("theme") ||
+            (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          var d = document.documentElement;
+          d.lang = l; d.dir = l === "fa" ? "rtl" : "ltr"; d.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
