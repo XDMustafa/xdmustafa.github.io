@@ -1,2 +1,2 @@
-# -xdmustafa.github.io
+# xdmustafa.github.io
 S.Mustafa Blog
