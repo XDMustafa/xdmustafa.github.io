@@ -2,6 +2,7 @@ import * as React from "react";
 import { IconFolder, IconHome, IconPen, IconUser } from "@devigner-ui/icons";
 import { MenuDock } from "@/components/ui/menu-dock";
 import { GooSwitch } from "@/components/ui/goo-switch";
+import { MusicPlayer } from "@/components/MusicPlayer";
 import { SoundToggle } from "@/components/SoundToggle";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useApp, useRoute } from "@/lib/app";
@@ -76,9 +77,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       <main className="flex-1 pb-16">{children}</main>
 
-      <footer className="ui flex flex-wrap justify-between gap-2 border-t border-border py-6 text-sm text-muted-foreground">
-        <span>© {new Date().getFullYear()} S. Mustafa</span>
-        <span>{s.footer}</span>
+      <footer className="ui border-t border-border py-6 text-sm text-muted-foreground">
+        <MusicPlayer />
+        <div className="mt-5 flex flex-wrap justify-between gap-2">
+          <span>© {new Date().getFullYear()} S. Mustafa</span>
+          <span>{s.footer}</span>
+        </div>
       </footer>
 
       <MenuDock
