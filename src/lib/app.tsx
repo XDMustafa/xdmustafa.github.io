@@ -29,7 +29,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     d.lang = lang;
     d.dir = lang === "fa" ? "rtl" : "ltr";
     localStorage.setItem("lang", lang);
-    document.title = lang === "fa" ? "س. مصطفی" : "S. Mustafa";
+    document.title = lang === "fa" ? "مصطفی" : "S. Mustafa";
     set((s) => ({ ...s, lang }));
   }, []);
 

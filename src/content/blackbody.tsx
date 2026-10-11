@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Tex } from "@/components/Tex";
+import { ZoomImage } from "@/components/ZoomImage";
 import { Badge } from "@/components/ui/badge";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Timeline } from "@/components/ui/timeline";
@@ -19,12 +20,7 @@ function Eq({ children }: { children: string }) {
 function Fig({ src, children, small }: { src: string; children: React.ReactNode; small?: boolean }) {
   return (
     <figure className="my-8">
-      <img
-        src={IMG + src}
-        alt=""
-        loading="lazy"
-        className={`mx-auto rounded-lg border border-border bg-white ${small ? "max-w-sm" : "w-full"}`}
-      />
+      <ZoomImage src={IMG + src} className={small ? "max-w-sm" : "w-full"} />
       <figcaption className="ui mt-3 text-center text-sm text-muted-foreground">{children}</figcaption>
     </figure>
   );
@@ -125,7 +121,7 @@ function Cite() {
       <p dir="ltr" className="ui text-left text-sm text-muted-foreground">
         {CITATION}
       </p>
-      <div className="mt-4" dir="ltr">
+      <div className="mt-4">
         <CopyButton size="sm" value={CITATION} label={s.copy} copiedLabel={s.copied} />
       </div>
     </div>
@@ -202,7 +198,7 @@ export function BlackbodyFa() {
   return (
     <>
       <p className="ui text-sm text-muted-foreground">
-        Xin Yang، Bing Wei — Xidian University · بازنویسی و تأیید محاسباتی: س. مصطفی
+        Xin Yang، Bing Wei — Xidian University · بازنویسی و تأیید محاسباتی: مصطفی
       </p>
       <div className="my-6 rounded-xl border border-border bg-card p-5">
         پس از مطالعه‌ی عمیق معادله‌ی نرمالایزشده‌ی پلانک، نوع تازه‌ای از منحنی‌های طیف تابش جسم سیاه ارائه

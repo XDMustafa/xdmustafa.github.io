@@ -1,10 +1,20 @@
 import * as React from "react";
-import { NavNotch } from "@/components/ui/nav-notch";
+import { IconFolder, IconHome, IconPen, IconUser } from "@devigner-ui/icons";
+import { MenuDock } from "@/components/ui/menu-dock";
 import { GooSwitch } from "@/components/ui/goo-switch";
+import { SoundToggle } from "@/components/SoundToggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useApp, useRoute } from "@/lib/app";
 import { ui } from "@/lib/strings";
 
 export const SECTIONS = ["home", "writing", "projects", "about"] as const;
+
+const ICONS = {
+  home: <IconHome />,
+  writing: <IconPen />,
+  projects: <IconFolder />,
+  about: <IconUser />,
+};
 
 export function goTo(id: string) {
   const scroll = () =>
@@ -18,14 +28,33 @@ export function goTo(id: string) {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { lang, setLang, theme, setTheme } = useApp();
+  const { lang, setLang } = useApp();
   const route = useRoute();
   const s = ui[lang];
   const [active, setActive] = React.useState("home");
   const onPost = route[0] === "post";
 
+  // The dock stays on screen while scrolling, so it follows the section in view.
+  React.useEffect(() => {
+    if (onPost) return;
+    const spy = () => {
+      const line = window.innerHeight * 0.4;
+      let current: string = "home";
+      for (const id of SECTIONS.slice(1)) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) current = id;
+      }
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2)
+        current = SECTIONS[SECTIONS.length - 1];
+      setActive(current);
+    };
+    spy();
+    window.addEventListener("scroll", spy, { passive: true });
+    return () => window.removeEventListener("scroll", spy);
+  }, [onPost]);
+
   return (
-    <div className="mx-auto flex min-h-dvh max-w-3xl flex-col px-5">
+    <div className="mx-auto flex min-h-dvh max-w-3xl flex-col px-5 pb-20">
       <header className="ui flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-5">
         <a href="#/" className="text-lg font-semibold no-underline">
           {s.brand}
@@ -41,30 +70,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             />
             <span>EN</span>
           </label>
-          <label dir="ltr" className="flex items-center gap-2">
-            <span>{s.light}</span>
-            <GooSwitch
-              size="sm"
-              aria-label={s.themeLabel}
-              checked={theme === "dark"}
-              onCheckedChange={(on) => setTheme(on ? "dark" : "light")}
-            />
-            <span>{s.dark}</span>
-          </label>
+          <ThemeToggle />
         </div>
-        {!onPost && (
-          <div className="flex w-full justify-center overflow-x-auto" dir="ltr">
-            <NavNotch
-              label={s.nav}
-              items={SECTIONS.map((id) => ({ id, label: s.sections[id] }))}
-              value={active}
-              onValueChange={(id) => {
-                setActive(id);
-                goTo(id);
-              }}
-            />
-          </div>
-        )}
       </header>
 
       <main className="flex-1 pb-16">{children}</main>
@@ -73,6 +80,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <span>© {new Date().getFullYear()} S. Mustafa</span>
         <span>{s.footer}</span>
       </footer>
+
+      <MenuDock
+        floating
+        label={s.nav}
+        active={onPost ? undefined : active}
+        classNames={{ shell: "glass" }}
+        items={SECTIONS.map((id) => ({
+          id,
+          label: s.sections[id],
+          icon: ICONS[id],
+          showLabel: !onPost && id === active,
+          onSelect: () => {
+            setActive(id);
+            goTo(id);
+          },
+        }))}
+      />
+      <SoundToggle />
     </div>
   );
 }

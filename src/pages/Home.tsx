@@ -1,7 +1,25 @@
-import { Badge } from "@/components/ui/badge";
+import {
+  IconArrowRight,
+  IconCode,
+  IconDribbble,
+  IconHashtag,
+  IconLinkedin,
+  IconPlain,
+} from "@devigner-ui/icons";
+import { Badge, type BadgeTone } from "@/components/ui/badge";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 import { useApp, useT } from "@/lib/app";
 import { ui } from "@/lib/strings";
 import { LINKS, POSTS, PROJECTS } from "@/content/posts";
+
+const TAG_TONES: BadgeTone[] = ["info", "success", "warning"];
+
+const LINK_STYLE: Record<string, { icon: React.ReactNode; className?: string; tone?: BadgeTone }> = {
+  GitHub: { icon: <IconCode /> },
+  Dribbble: { icon: <IconDribbble />, className: "text-pink-700 dark:text-pink-400" },
+  Telegram: { icon: <IconPlain />, tone: "info" },
+  LinkedIn: { icon: <IconLinkedin />, className: "text-sky-700 dark:text-sky-400" },
+};
 
 const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
   <section id={id} className="scroll-mt-6 pt-14">
@@ -26,17 +44,32 @@ export function Home() {
       <Section id="writing" title={s.writing}>
         <ul className="divide-y divide-border border-y border-border">
           {POSTS.map((p) => (
-            <li key={p.slug}>
-              <a href={`#/post/${p.slug}`} className="group block py-5 no-underline">
-                <div className="ui mb-2 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                  <span>{t(p.date)}</span>
-                  {t(p.tags).map((tag) => (
-                    <Badge key={tag} size="sm">{tag}</Badge>
-                  ))}
-                </div>
-                <h3 className="text-xl font-bold group-hover:underline">{t(p.title)}</h3>
-                <p className="mt-1 text-muted-foreground">{t(p.summary)}</p>
-              </a>
+            <li key={p.slug} className="group relative py-5">
+              <div className="ui mb-2 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                <span>{t(p.date)}</span>
+                {t(p.tags).map((tag, i) => (
+                  <Badge key={tag} size="sm" tone={TAG_TONES[i % TAG_TONES.length]} icon={<IconHashtag />}>
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              {/* The title link covers the whole row; the button sits above it. */}
+              <h3 className="text-xl font-bold group-hover:underline">
+                <a href={`#/post/${p.slug}`} className="no-underline after:absolute after:inset-0">
+                  {t(p.title)}
+                </a>
+              </h3>
+              <p className="mt-1 text-muted-foreground">{t(p.summary)}</p>
+              <div className="relative z-10 mt-4 w-fit">
+                <MagneticButton
+                  href={`#/post/${p.slug}`}
+                  field={24}
+                  className="ui border border-border bg-card px-5 py-2 text-xs font-semibold tracking-[0.14em] transition-colors hover:border-foreground"
+                >
+                  {s.readMore}
+                  <IconArrowRight className="size-4 rtl:-scale-x-100" />
+                </MagneticButton>
+              </div>
             </li>
           ))}
         </ul>
@@ -64,7 +97,16 @@ export function Home() {
         <p className="max-w-prose">{s.aboutBody}</p>
         <div className="ui mt-6 flex flex-wrap gap-2">
           {LINKS.map((l) => (
-            <Badge key={l.label} size="lg" href={l.url} target="_blank" rel="noopener noreferrer">
+            <Badge
+              key={l.label}
+              size="lg"
+              href={l.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              icon={LINK_STYLE[l.label]?.icon}
+              tone={LINK_STYLE[l.label]?.tone}
+              className={LINK_STYLE[l.label]?.className}
+            >
               {l.label}
             </Badge>
           ))}

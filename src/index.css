@@ -19,6 +19,7 @@
   --border: oklch(0.88 0.004 90);
   --destructive: oklch(0.55 0.2 27);
   --ring: oklch(0.55 0 0);
+  --glass-edge: rgb(255 255 255 / 0.7);
   color-scheme: light;
 }
 [data-theme="dark"] {
@@ -31,6 +32,7 @@
   --border: oklch(0.28 0 0);
   --destructive: oklch(0.65 0.2 25);
   --ring: oklch(0.7 0 0);
+  --glass-edge: rgb(255 255 255 / 0.14);
   color-scheme: dark;
 }
 
@@ -44,6 +46,8 @@
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-ring: var(--ring);
+  --color-secondary: var(--card);
+  --color-accent: color-mix(in oklab, var(--foreground) 9%, transparent);
   --font-ui: "Estedad", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Dibaj", "Estedad", ui-serif, serif;
 }
@@ -57,6 +61,43 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 { font-family: "Dibaj
 
 ::selection { background: var(--foreground); color: var(--background); }
 a { text-underline-offset: 4px; }
+
+/* Frosted glass for floating controls (menu dock, sound toggle). Unlayered,
+   so it wins over the components' own bg and shadow utilities. */
+.glass {
+  background: color-mix(in oklab, var(--background) 55%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+  backdrop-filter: blur(18px) saturate(1.6);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-edge),
+    0 0 0 1px color-mix(in oklab, var(--foreground) 10%, transparent),
+    0 10px 30px -8px rgb(0 0 0 / 0.25);
+}
+
+/* Image zoom: fade the dialog and its blurred backdrop in and out. */
+.zoom-dialog::backdrop {
+  background: color-mix(in oklab, var(--background) 60%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.zoom-dialog, .zoom-dialog::backdrop {
+  opacity: 0;
+  transition: opacity .25s ease-out, overlay .25s allow-discrete, display .25s allow-discrete;
+}
+.zoom-dialog[open], .zoom-dialog[open]::backdrop { opacity: 1; }
+.zoom-image { transform: scale(.96); transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+.zoom-dialog[open] .zoom-image { transform: none; }
+@starting-style {
+  .zoom-dialog[open], .zoom-dialog[open]::backdrop { opacity: 0; }
+  .zoom-dialog[open] .zoom-image { transform: scale(.96); }
+}
+
+/* Theme switch: the new theme grows as a circle (ThemeToggle drives clip-path). */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom-dialog, .zoom-dialog::backdrop, .zoom-image { transition: none; }
+}
 
 /* Equations stay left-to-right inside RTL text. */
 .eq { direction: ltr; overflow-x: auto; overflow-y: hidden; padding-block: .25rem; }

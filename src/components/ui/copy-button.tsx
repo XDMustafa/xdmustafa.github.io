@@ -92,11 +92,38 @@ export interface CopyButtonProps extends ButtonProps {
   disabled?: boolean;
 }
 
+const RTL_SCRIPT = /[\u0590-\u08FF]/;
+
 const defaultCopy = (text: string) => navigator.clipboard.writeText(text);
 
 /** Each letter keyed by its slot and glyph, so the shared prefix of the two
  *  labels ("Cop") stays put and only the letters that differ swap. */
 function Letters({ text, reduced }: { text: string; reduced: boolean }) {
+  // Persian and Arabic letters join only within one text run, and a row of
+  // per-letter boxes would also lay out left to right. Swap the whole word.
+  if (RTL_SCRIPT.test(text)) {
+    return (
+      <motion.span
+        aria-hidden
+        layout={reduced ? false : "position"}
+        transition={SPRING_LAYOUT}
+        className="relative inline-flex whitespace-pre"
+      >
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.span
+            key={text}
+            dir="rtl"
+            initial={reduced ? { opacity: 0 } : { opacity: 0, filter: BLUR, y: 2 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, filter: BLUR, y: -2 }}
+            transition={SPRING_SWAP}
+          >
+            {text}
+          </motion.span>
+        </AnimatePresence>
+      </motion.span>
+    );
+  }
   return (
     // layout="position" counter-scales the letters while the button's width
     // animates, so they never stretch.
