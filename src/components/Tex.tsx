@@ -1,5 +1,8 @@
 import katex from "katex";
-import "katex/dist/katex.min.css";
+
+// KaTeX CSS is imported once in main.tsx (not here) so it lands in the main
+// CSS bundle instead of a per-chunk file that Rolldown references but the
+// deployment doesn't ship.
 
 /** TeX is always left-to-right, even inside Persian text. */
 export function Tex({ children, display = false }: { children: string; display?: boolean }) {
