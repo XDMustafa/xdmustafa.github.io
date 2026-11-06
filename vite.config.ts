@@ -10,6 +10,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     sourcemap: true,
+    // Rolldown per-chunk CSS references short-names in the manifest that don't
+    // match deployed files (CI builds with different hashes). One bundle avoids
+    // the 404. ponytail: re-enable when Rolldown manifest matches CI output.
+    cssCodeSplit: false,
   },
   resolve: {
     alias: [
