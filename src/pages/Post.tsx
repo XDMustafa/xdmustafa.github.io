@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Badge } from "@/components/ui/badge";
 import { useApp, useT } from "@/lib/app";
 import { ui } from "@/lib/strings";
@@ -30,7 +31,9 @@ export default function PostPage({ slug }: { slug: string }) {
       </div>
       <h1 className="text-3xl leading-tight font-bold tracking-tight sm:text-4xl">{t(post.title)}</h1>
       <div className="mt-6">
-        <Body />
+        <Suspense fallback={<div className="py-8 text-center text-muted-foreground">…</div>}>
+          <Body />
+        </Suspense>
       </div>
     </article>
   );
