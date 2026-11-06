@@ -1,6 +1,10 @@
-import type { ComponentType } from "react";
+import { lazy, type ComponentType } from "react";
 import type { Lang } from "@/lib/app";
-import { BlackbodyEn, BlackbodyFa } from "./blackbody";
+
+// Body components are lazy: KaTeX + blackbody data (~100 KB code) only load
+// when a post is actually opened, not on the home page.
+const BlackbodyFa = lazy(() => import("./blackbody").then((m) => ({ default: m.BlackbodyFa })));
+const BlackbodyEn = lazy(() => import("./blackbody").then((m) => ({ default: m.BlackbodyEn })));
 
 type L<T> = Record<Lang, T>;
 

@@ -8,11 +8,17 @@ import { ui } from "@/lib/strings";
 export function SoundToggle() {
   const { lang } = useApp();
   const s = ui[lang];
-  const { playing } = useMusic();
+  const { playing, ready } = useMusic();
 
   const toggle = () => {
-    if (!toggleMusic())
-      document.getElementById("music")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (!ready) {
+      // Player is not loaded yet: scroll to it and trigger the facade.
+      const btn = document.querySelector<HTMLButtonElement>("#music button");
+      if (btn) btn.click();
+      else document.getElementById("music")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    toggleMusic();
   };
 
   const label = playing ? s.soundOff : s.soundOn;

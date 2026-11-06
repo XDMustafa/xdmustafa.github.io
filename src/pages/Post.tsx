@@ -3,7 +3,7 @@ import { useApp, useT } from "@/lib/app";
 import { ui } from "@/lib/strings";
 import { POSTS } from "@/content/posts";
 
-export function PostPage({ slug }: { slug: string }) {
+export default function PostPage({ slug }: { slug: string }) {
   const { lang } = useApp();
   const t = useT();
   const s = ui[lang];

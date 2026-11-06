@@ -3,11 +3,10 @@
 /* Theme switch is the data-theme attribute, not prefers-color-scheme. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-@font-face { font-family: "Dibaj"; font-weight: 400; font-display: swap; src: url("/fonts/Dibaj-MediumContrastRegular.ttf") format("truetype"); }
-@font-face { font-family: "Dibaj"; font-weight: 500; font-display: swap; src: url("/fonts/Dibaj-MediumContrastMedium.ttf") format("truetype"); }
-@font-face { font-family: "Dibaj"; font-weight: 700; font-display: swap; src: url("/fonts/Dibaj-MediumContrastBold.ttf") format("truetype"); }
-@font-face { font-family: "Estedad"; font-weight: 400; font-display: swap; src: url("/fonts/Estedad-Regular.ttf") format("truetype"); }
-@font-face { font-family: "Estedad"; font-weight: 600; font-display: swap; src: url("/fonts/Estedad-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Dibaj"; font-weight: 400; font-display: swap; src: url("/fonts/Dibaj-MediumContrastRegular.woff2") format("woff2"); ascent-override: 105%; descent-override: 45%; }
+@font-face { font-family: "Dibaj"; font-weight: 700; font-display: swap; src: url("/fonts/Dibaj-MediumContrastBold.woff2") format("woff2"); ascent-override: 105%; descent-override: 45%; }
+@font-face { font-family: "Estedad"; font-weight: 400; font-display: swap; src: url("/fonts/Estedad-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Estedad"; font-weight: 600; font-display: swap; src: url("/fonts/Estedad-SemiBold.woff2") format("woff2"); }
 
 :root, [data-theme="light"] {
   --background: oklch(0.985 0.003 90);

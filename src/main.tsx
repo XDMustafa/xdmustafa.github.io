@@ -1,10 +1,13 @@
-import { StrictMode, useEffect } from "react";
+import { StrictMode, Suspense, lazy, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { AppProvider, useRoute } from "@/lib/app";
 import { Layout } from "@/components/Layout";
 import { Home } from "@/pages/Home";
-import { PostPage } from "@/pages/Post";
+
+// The post page carries KaTeX + the heavy blackbody content. Only fetched
+// when a post is actually opened, so the home route ships without it.
+const PostPage = lazy(() => import("@/pages/Post"));
 
 function App() {
   const [page, slug] = useRoute();
@@ -12,7 +15,17 @@ function App() {
   useEffect(() => {
     if (page === "post") window.scrollTo(0, 0);
   }, [page, slug]);
-  return <Layout>{page === "post" && slug ? <PostPage slug={slug} /> : <Home />}</Layout>;
+  return (
+    <Layout>
+      {page === "post" && slug ? (
+        <Suspense fallback={<div className="py-16 text-center text-muted-foreground">…</div>}>
+          <PostPage slug={slug} />
+        </Suspense>
+      ) : (
+        <Home />
+      )}
+    </Layout>
+  );
 }
 
 createRoot(document.getElementById("root")!).render(

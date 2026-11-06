@@ -18,23 +18,40 @@ const SRC =
     visual: "false",
   });
 
-// The official SoundCloud embed, kept visible with its credit line as
-// SoundCloud's terms require. The corner SoundToggle controls it.
+// Facade: SoundCloud iframe + Widget API load only on click, not at page
+// open. The placeholder is the same 20px height as the real player so
+// there is zero layout shift when loaded.
 export function MusicPlayer() {
   const frame = React.useRef<HTMLIFrameElement>(null);
-  React.useEffect(() => attachPlayer(frame.current!), []);
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => { if (loaded) attachPlayer(frame.current!); }, [loaded]);
 
   return (
     <div id="music" className="scroll-mt-6">
-      <iframe
-        ref={frame}
-        title={`SoundCloud · ${ARTIST.name} · ${TRACK.name}`}
-        src={SRC}
-        height={20}
-        scrolling="no"
-        allow="autoplay; encrypted-media"
-        className="block w-full border-0"
-      />
+      {loaded ? (
+        <iframe
+          ref={frame}
+          title={`SoundCloud · ${ARTIST.name} · ${TRACK.name}`}
+          src={SRC}
+          height={20}
+          scrolling="no"
+          allow="autoplay; encrypted-media"
+          className="block w-full border-0"
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setLoaded(true)}
+          className="flex h-5 w-full items-center gap-2 rounded text-start text-xs text-muted-foreground hover:text-foreground"
+        >
+          <svg viewBox="0 0 24 24" className="size-3.5 shrink-0" fill="currentColor" aria-hidden>
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          <span dir="ltr" className="truncate">
+            {ARTIST.name} · <span className="font-mono">{TRACK.name}</span>
+          </span>
+        </button>
+      )}
       <p className="mt-1.5 truncate text-xs">
         <span dir="ltr">
           <a href={ARTIST.url} target="_blank" rel="noopener noreferrer" className="no-underline hover:text-foreground">

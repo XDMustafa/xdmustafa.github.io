@@ -553,7 +553,7 @@ export function MenuDock({
                     tabIndex={isContent || focusIndex === 0 ? 0 : -1}
                     className={cn(
                       "h-10 w-full gap-3 rounded-2xl px-3 text-left text-[15px]",
-                      "font-medium text-foreground transition-colors hover:bg-accent",
+                      "font-medium text-foreground hover:bg-accent",
                     )}
                   >
                     <span className={GLYPH} aria-hidden>
@@ -617,7 +617,7 @@ export function MenuDock({
                             : { width: TAP, height: TAP }
                       }
                       className={cn(
-                        "transition-colors hover:bg-accent",
+                        "hover:bg-accent",
                         open
                           ? "h-10 w-full gap-3 rounded-2xl px-3 text-left text-[15px]"
                           : labelled

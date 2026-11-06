@@ -8,6 +8,9 @@ import path from "node:path";
 export default defineConfig({
   base: "./",
   plugins: [react(), tailwindcss()],
+  build: {
+    sourcemap: true,
+  },
   resolve: {
     alias: [
       // Exact match only; subpaths like "@devigner-ui/icons/Copy" pass through.
