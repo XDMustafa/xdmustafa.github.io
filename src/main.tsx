@@ -1,5 +1,8 @@
 import { StrictMode, Suspense, lazy, useEffect } from "react";
 import { createRoot } from "react-dom/client";
+// Entry-point import: KaTeX styles must ship in the main bundle, not a lazy
+// chunk (Rolldown's per-chunk CSS never made it into the deploy).
+import "katex/dist/katex.min.css";
 import "./index.css";
 import { AppProvider, useRoute } from "@/lib/app";
 import { Layout } from "@/components/Layout";

@@ -1,2 +1,8 @@
 node_modules
+dist
+# Root-level copies from an earlier deploy iteration — Pages deploys dist/
+# via .github/workflows/deploy.yml; never commit these again.
+/assets
+/fonts
+/images
 .DS_Store

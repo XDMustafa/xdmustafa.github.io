@@ -55,6 +55,15 @@ html { background: var(--background); color: var(--foreground); }
 /* Persian: Dibaj for body and titles. English: Estedad (its Latin is clean). */
 html[lang="fa"] body { font-family: "Dibaj", "Estedad", serif; font-size: 1.15rem; line-height: 2; }
 html[lang="en"] body { font-family: "Estedad", ui-sans-serif, system-ui, sans-serif; font-size: 1rem; line-height: 1.8; }
+/* Desktop: the phone-sized type reads zoomed inside the 768px column.
+   The first (plain-HTML) design used 18px/1.9 on a 760px measure — mirror
+   that proportion so the layout adapts to the environment instead of
+   staying phone-sized everywhere. */
+@media (min-width: 768px) {
+  html[lang="fa"] body { font-size: 1rem; line-height: 1.9; }
+  html[lang="en"] body { font-size: 0.95rem; line-height: 1.75; }
+  html[lang="fa"] h1 { font-size: 2.25rem; }
+}
 html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 { font-family: "Dibaj", serif; font-weight: 700; }
 .ui { font-family: "Estedad", ui-sans-serif, system-ui, sans-serif; line-height: 1.5; }
 
